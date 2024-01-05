@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'categoria',
     'cuentas',
     'store',
+    'carrito',
+    'pedidos',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'categoria.context_processors.menu_links',
+                'carrito.context_processors.counter',
             ],
         },
     },
@@ -129,6 +132,20 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
+
+
+#Para poder incomporar los estilos de los mensajes de error de bootstrap
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR : 'danger',
+}
+
+#Configuracion de host para activar cuentas.
+EMAIL_HOST= 'smtp.gmail.com'
+EMAIL_PORT= 587
+EMAIL_HOST_USER= 'pelaopyme1978@gmail.com'
+EMAIL_HOST_PASSWORD= 'vkay zngg suoc kudo'
+EMAIL_USE_TLS= True
 
 
 # Default primary key field type

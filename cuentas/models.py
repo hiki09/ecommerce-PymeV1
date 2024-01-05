@@ -61,6 +61,9 @@ class Cuenta(AbstractBaseUser):
 
     objects = MyAccountManager()
 
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     def __str__(self):
         return self.email
     
@@ -70,3 +73,17 @@ class Cuenta(AbstractBaseUser):
     def has_module_perms(self, add_label):
         return True
 
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(Cuenta, on_delete=models.CASCADE)
+    direccion = models.CharField(blank=True, max_length=100)
+    comuna = models.CharField(blank=True, max_length=100)
+    profile_picture = models.ImageField(blank=True, upload_to='userprofile')
+
+
+    def __str__(self):
+        return self.user.first_name
+    
+    def full_direccion(self):
+        return f'{self.direccion} {self.comuna}'
